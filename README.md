@@ -14,7 +14,7 @@ The service has a simple REST interface that presents two endpoints:
 
 
 ## Install
-    git clone https://github.com/mjbcopland/palindrome-database
+    git clone https://github.com/mjbcopland/palindrome-database.git
     cd palindrome-database
     npm install
 
@@ -31,3 +31,5 @@ The TIMEOUT test takes 10 minutes to run and is not enabled by default. To run t
 By default the service uses port 3000. Use the PORT environment variable to specify a port, e.g.
 
     PORT=80 npm start
+
+[Postman](https://www.getpostman.com/) is useful for manually testing with a live instance.
