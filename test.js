@@ -77,7 +77,7 @@ describe('Palindrome Database', function () {
           .type(item)
           .expect(200, done)
       })
-    
+
       it(`Returns JSON content for request type '${item}'`, function (done) {
         request(app)
           .post('/palindromes')
@@ -170,31 +170,33 @@ describe('Palindrome Database', function () {
       })
     })
 
-    it('Doesn\'t return non-palindromes', function (done) {
-      async.series([
-        // POST all non-palindromes
-        function (done) {
-          async.each(
-            nonPalindromes,
-            function (item, done) {
-              request(app)
-                .post('/palindromes')
-                .type('text/plain')
-                .send(item)
-                .end(done)
+    inits(nonPalindromes).forEach(function (init) {
+      it(`Returns 0/${init.length} non-palindromes`, function (done) {
+        async.series([
+            // POST non-palindromes
+            function (done) {
+              async.each(
+                init,
+                function (item, done) {
+                  request(app)
+                    .post('/palindromes')
+                    .type('text/plain')
+                    .send(item)
+                    .end(done)
+                },
+                done
+              )
             },
-            done
-          )
-        },
-        // Check GET returns empty
-        function (done) {
-          request(app)
-            .get('/palindromes')
-            .expect([], done)
-        }
-      ],
-      done
-    )
+            // Check GET returns empty
+            function (done) {
+              request(app)
+                .get('/palindromes')
+                .expect([], done)
+            }
+          ],
+          done
+        )
+      })
     })
   })
 
