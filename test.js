@@ -9,7 +9,7 @@ var app = require('./app')
 const palindromes = [
   "",
   "!\"£$%^&*() ",
-  "ée",
+  "éae",
   "ГГ",
   "123454321",
   "Dammit I'm mad",

@@ -6,6 +6,8 @@ const app = express()
 const bodyParser = require('body-parser')
 const textParser = bodyParser.text()
 
+const removeDiacritics = require('diacritics').remove
+
 // Because we don't need to persist the palindromes,
 // we simply use an array instead of bothering with
 // an actual database
@@ -37,7 +39,7 @@ palindromes.push = function () {
 function isPalindrome(str) {
   // Our palindromes are whitespace, capitalisation,
   // and punctuaction agnostic
-  str = str.toLowerCase().replace(/\W/g, '')
+  str = removeDiacritics(str).toLowerCase().replace(/\W/g, '')
 
   // Reasonably intuitive
   return str == str.split('').reverse().join('')
